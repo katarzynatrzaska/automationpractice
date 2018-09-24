@@ -19,11 +19,7 @@ public class LogoRedirect {
 		String yourLogoURL = "http://automationpractice.com/index.php";
 		WebElement yourLogo = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/img/logo.jpg"));
 		yourLogo.click();
-		if (driver.getCurrentUrl().equals(yourLogoURL)) {
-			System.out.println("Veryfing yourLogo URL passed");
-		} else {
-			System.out.println("Veryfing yourLogo URL did not passed");
-		}
+		assertEquals(driver.getCurrentUrl(),yourLogoURL);
 
 	}
 }
