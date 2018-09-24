@@ -1,14 +1,13 @@
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+
 @Test
 public class LogoRedirect {
 
-	public void testng () {
+	public void testng() {
 		System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 
