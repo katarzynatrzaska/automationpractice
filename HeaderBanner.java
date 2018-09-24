@@ -23,12 +23,8 @@ public class HeaderBanner {
 		WebElement banner = driver.findElement(
 				By.cssSelector("[src=\"http://automationpractice.com/modules/blockbanner/img/sale70.png\"]"));
 		banner.click();
-		if (driver.getCurrentUrl().equals(bannerURL)) {
-			System.out.println("Veryfing banner URL passed");
-		} else {
-			System.out.println("Veryfing banner URL did not passed");
-		}
-
+	
+		assertEquals(driver.getCurrentUrl(),bannerURL);
 	}
 
 }
