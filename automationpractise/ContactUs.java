@@ -1,4 +1,4 @@
-package automationpractice.com;
+
 
 import org.openqa.selenium.By;
 
@@ -82,4 +82,4 @@ public class ContactUs {
 		}
 
 	}
-}TEST 
+}
