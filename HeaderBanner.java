@@ -27,7 +27,7 @@ public class HeaderBanner {
 	}
 
 	@Test(priority = 0)
-	public void HeaderUrlRedirect() {
+	public void headerUrlRedirect() {
 		/* Go to main page */
 		driver = new ChromeDriver();
 
