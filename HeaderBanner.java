@@ -1,16 +1,15 @@
 package automationpractise.com;
 
-import static org.testng.Assert.assertEquals;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class LogoRedirect {
+public class HeaderBanner {
 	protected static WebDriver driver;
 
 	@BeforeTest()
@@ -23,18 +22,21 @@ public class LogoRedirect {
 		driver.quit();
 	}
 
-	@Test()(priority = 0)
-	public void logoRedirectURL() {
+	@Test(priority = 0)
+	public void headerUrlRedirect() 
+	{
+		/* Go to main page */
 		driver = new ChromeDriver();
 
-		/* Go to main page */
 		driver.get("http://automationpractice.com/index.php");
 
-		/* Your Logo img - verify redirect URL */
-		String yourLogoURL = "http://automationpractice.com/index.php";
-		WebElement yourLogo = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/img/logo.jpg"));
-		yourLogo.click();
-
-		assertEquals(driver.getCurrentUrl(), yourLogoURL);
+		/* header banner - verify redirect URL */
+		
+	WebElement banner = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/modules/blockbanner/img/sale70.png\"]"));
+	banner.click();
+	driver.getCurrentUrl();
+	
+		Assert.assertEquals(driver.getCurrentUrl(),"http://automationpractice.com/indexx.php");
 	}
+
 }
