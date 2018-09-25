@@ -10,36 +10,31 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-@Test
-
-public class HeaderBanner {
+public class LogoRedirect {
 	protected static WebDriver driver;
-	
+
 	@BeforeTest()
-	public void beforeTest()
-	{
+	public void beforeTest() {
 		System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
 	}
+
 	@AfterTest()
-	public void afterTest() 
-	{
+	public void afterTest() {
 		driver.quit();
 	}
 
-	@Test(priority = 0)
-	public void headerUrlRedirect() {
-		/* Go to main page */
+	@Test()(priority = 0)
+	public void logoRedirectURL() {
 		driver = new ChromeDriver();
 
+		/* Go to main page */
 		driver.get("http://automationpractice.com/index.php");
 
-		/* header banner - verify redirect URL */
-		String bannerURL = "http://automationpractice.com/index.php";
-		WebElement banner = driver.findElement(
-				By.cssSelector("[src=\"http://automationpractice.com/modules/blockbanner/img/sale70.png\"]"));
-		banner.click();
+		/* Your Logo img - verify redirect URL */
+		String yourLogoURL = "http://automationpractice.com/index.php";
+		WebElement yourLogo = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/img/logo.jpg"));
+		yourLogo.click();
 
-		assertEquals(driver.getCurrentUrl(), bannerURL);
+		assertEquals(driver.getCurrentUrl(), yourLogoURL);
 	}
-
 }
