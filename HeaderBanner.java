@@ -23,20 +23,20 @@ public class HeaderBanner {
 	}
 
 	@Test(priority = 0)
-	public void headerUrlRedirect() 
-	{
+	public void headerUrlRedirect() {
 		/* Go to main page */
 		driver = new ChromeDriver();
 
 		driver.get("http://automationpractice.com/index.php");
 
 		/* header banner - verify redirect URL */
-		
-	WebElement banner = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/modules/blockbanner/img/sale70.png\"]"));
-	banner.click();
-	driver.getCurrentUrl();
-	
-		Assert.assertEquals(driver.getCurrentUrl(),"http://automationpractice.com/indexx.php");
+
+		WebElement banner = driver.findElement(
+				By.cssSelector("[src=\"http://automationpractice.com/modules/blockbanner/img/sale70.png\"]"));
+		banner.click();
+		driver.getCurrentUrl();
+
+		Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php");
 	}
 
 }
