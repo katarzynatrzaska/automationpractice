@@ -1,35 +1,50 @@
+package automationpractise.com;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-@Test
-
 public class ContactUs {
+	protected static WebDriver driver;
 
-	public void testng() {
+	@BeforeTest()
+	public void beforeTest() {
 		System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+	}
 
-		/* Go to main page */
+	@AfterTest()
+	public void afterTest() {
+		driver.quit();
+	}
+
+	/* Contact Us tab - verify redirect URL */
+	@Test(priority = 0)
+	public void contactUsTest() {
+		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php");
 
-		/* Contact Us tab - verify redirect URL */
-		String ContactURL = "http://automationpractice.com/index.php?controller=contact";
 		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
 		ContactUs.click();
+		driver.getCurrentUrl();
 		{
-			if (driver.getCurrentUrl().equals(ContactURL)) {
-				System.out.println("Veryfing ContactUs URL passed");
-			} else {
-				System.out.println("Veryfing ContactUs URL did not passed");
-			}
-
+			Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php?controller=contact");
+			driver.close();
 		}
+	}
 
-		/* Choosing drop down first option */
+	/* Choosing drop down first option */
+	@Test(priority = 1)
+	public void dropdownTests1() {
+		driver = new ChromeDriver();
+		driver.get("http://automationpractice.com/index.php");
+		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
+		ContactUs.click();
 		Select Subject = new Select(driver.findElement(By.id("id_contact")));
 		Subject.selectByVisibleText("Customer service");
 
@@ -37,45 +52,27 @@ public class ContactUs {
 		WebElement CustomerText = driver.findElement(By.xpath("//*[@id=\"desc_contact2\"]"));
 		CustomerText.getText();
 		{
-			if (driver.getPageSource().contains("For any question about a product, an order")) {
-				System.out.println("Text is correct");
-
-			} else {
-				System.out.println("Text is incorrect");
-
-			}
+			Assert.assertEquals(CustomerText.getText(), "For any question about a product, an order");
+			driver.close();
 		}
 
-		/* Choosing drop down second option */
+	}
+
+	/* Choosing drop down second option */
+	@Test(priority = 2)
+	public void dropdownTests2() {
+		driver = new ChromeDriver();
+		driver.get("http://automationpractice.com/index.php");
+		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
+		ContactUs.click();
+		Select Subject = new Select(driver.findElement(By.id("id_contact")));
 		Subject.selectByVisibleText("Webmaster");
 
-		/* Checking if the text under the drop down is correct */
 		WebElement WebmasterText = driver.findElement(By.xpath("//*[@id=\"desc_contact1\"]"));
 		WebmasterText.getText();
-		if (driver.getPageSource().contains("If a technical problem occurs on this website")) {
-			System.out.println("Text is correct");
-
-		} else {
-			System.out.println("Text is incorrect");
-
-		}
-
-		/* CONTACT FORM VALIDATION */
-
-		/* Leave inputs empty - click Submit */
-		WebElement SendButton = driver.findElement(By.id("submitMessage"));
-		SendButton.click();
-
-		WebElement EmptyFieldsError = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
-		EmptyFieldsError.getText();
 		{
-			if (driver.getPageSource().contains("Invalid email address.")) {
-				System.out.println("EmptyFields error is correct");
-
-			} else {
-				System.out.println("EmptyFields error is incorect");
-
-			}
+			Assert.assertEquals(WebmasterText.getText(), "If a technical problem occurs on this website");
+			driver.close();
 		}
 
 	}
