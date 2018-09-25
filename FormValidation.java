@@ -21,7 +21,6 @@ public class FormValidation {
 		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php?controller=contact");
 
-		/* Leave inputs empty - click Submit */
 		WebElement SendButton = driver.findElement(By.id("submitMessage"));
 		SendButton.click();
 		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
@@ -39,10 +38,8 @@ public class FormValidation {
 		SendButton.click();
 		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
 		{
-			{
-				Assert.assertEquals(ErrorField.getText(), "The message cannot be blank.");
-			}
-
+			Assert.assertEquals(ErrorField.getText(), "The message cannot be blank.");
 		}
+
 	}
 }
