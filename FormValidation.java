@@ -1,16 +1,23 @@
 package automationpractice.com;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class FormValidation {
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.UUID;
+
+public class CreateAccount {
 	protected static WebDriver driver;
 
 	@BeforeTest()
@@ -20,37 +27,53 @@ public class FormValidation {
 
 	@AfterTest()
 	public void afterTest() {
-		driver.quit();
+
 	}
 
 	@Test(priority = 0)
-	public void blankFormTest() {
+	public void correctSignIn() {
+
 		driver = new ChromeDriver();
-		driver.get("http://automationpractice.com/index.php?controller=contact");
-		driver.findElement(By.id("submitMessage")).click();
-		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
-		Assert.assertEquals(ErrorField.getText(), "Invalid email address.");
+		driver.get("http://automationpractice.com/index.php");
+		driver.findElement(By.partialLinkText("Sign")).click();
+		driver.findElement(By.id("email_create")).sendKeys("usename" + rad.nextInt(100) + "@test.com");
+		driver.findElement(By.id("SubmitCreate")).click();
+
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("customer_lastname")));
+
+		driver.findElement(By.id("customer_firstname")).sendKeys((RandomStringUtils.randomAlphabetic(5)));
+		/* If there was no automatic copy-paste names, use code below */
+		// String customerFirstName =
+		// driver.findElement(By.id("customer_firstname")).getText();
+		// driver.findElement(By.id("firstname")).sendKeys(customerFirstName);
+
+		driver.findElement(By.id("customer_lastname")).sendKeys((RandomStringUtils.randomAlphabetic(5)));
+		/* If there was no automatic copy-paste names, use code below */
+		// String customerLastName =
+		// driver.findElement(By.id("customer_lastname")).getText();
+		// driver.findElement(By.id("lastname")).sendKeys(customerLastName);
+
+		driver.findElement(By.id("id_gender2")).click();
+		driver.findElement(By.id("passwd")).sendKeys((RandomStringUtils.randomAlphabetic(8)));
+		driver.findElement(By.id("address1")).sendKeys((rad.nextInt(100) + " TestStreet"));
+		driver.findElement(By.id("city")).sendKeys("TestCity");
+
+		Select state = new Select(driver.findElement(By.id("id_state")));
+		state.selectByVisibleText("Oklahoma");
+		driver.findElement(By.id("phone_mobile")).sendKeys((rad.nextInt(100) + "123456"));
+		
 	}
 
-	@Test(priority = 1)
-	public void correctEmailonly() {
-		driver.findElement(By.id("email")).sendKeys("kasiatrzaska@o2.pl");
-		driver.findElement(By.id("submitMessage")).click();
-		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
-		Assert.assertEquals(ErrorField.getText(), "The message cannot be blank.");
+	Random rad = new Random();
+	{
+		for (int j = 1; j <= 1; j++) {
+			System.out.print("usename" + rad.nextInt(100) + "@test.com");
+		}
 	}
 
-	@Test(priority = 2)
-	public void allCorrect() {
+	public String generateRandomString(int length) {
+		return RandomStringUtils.randomAlphabetic(length);
 
-		Select subject = new Select(driver.findElement(By.id("id_contact")));
-		subject.selectByVisibleText("Customer service");
-		driver.findElement(By.id("id_order")).sendKeys("Order 123");
-		driver.findElement(By.id("message")).sendKeys("Test message");
-		/* File upload */
-		driver.findElement(By.id("fileUpload")).sendKeys("C:\\test_image.png");
-		driver.findElement(By.id("submitMessage")).click();
-		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/p"));
-		Assert.assertEquals(ErrorField.getText(), "Your message has been successfully sent to our team.");
 	}
 }
