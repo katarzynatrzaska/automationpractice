@@ -62,7 +62,8 @@ public class CreateAccount {
 		Select state = new Select(driver.findElement(By.id("id_state")));
 		state.selectByVisibleText("Oklahoma");
 		driver.findElement(By.id("phone_mobile")).sendKeys((rad.nextInt(100) + "123456"));
-		
+
+		driver.findElement(By.id("submitAccount")).click();
 	}
 
 	Random rad = new Random();
@@ -77,3 +78,4 @@ public class CreateAccount {
 
 	}
 }
+
