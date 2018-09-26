@@ -1,4 +1,4 @@
-ackage automationpractice.com;
+package automationpractice.com;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
