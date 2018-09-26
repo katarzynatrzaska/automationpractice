@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author katar
- *
- */
-module automationpractise {
-}
