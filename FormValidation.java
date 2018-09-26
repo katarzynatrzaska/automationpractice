@@ -42,10 +42,13 @@ public class FormValidation {
 
 	@Test(priority = 2)
 	public void allCorrect() {
+
 		Select subject = new Select(driver.findElement(By.id("id_contact")));
 		subject.selectByVisibleText("Customer service");
 		driver.findElement(By.id("id_order")).sendKeys("Order 123");
 		driver.findElement(By.id("message")).sendKeys("Test message");
+		/* File upload */
+		driver.findElement(By.id("fileUpload")).sendKeys("C:\\test_image.png");
 		driver.findElement(By.id("submitMessage")).click();
 		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/p"));
 		Assert.assertEquals(ErrorField.getText(), "Your message has been successfully sent to our team.");
