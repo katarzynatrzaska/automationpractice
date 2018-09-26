@@ -1,4 +1,4 @@
-/*var SendButton is calld using private WebElement getSendButton*/
+
 package automationpractice.com;
 
 import org.openqa.selenium.By;
@@ -37,7 +37,7 @@ public class AlternativeConctactUs {
 		Assert.assertEquals(errorField.getText(), "The message cannot be blank.");
 
 	}
-
+/*var SendButton is called using private WebElement getSendButton*/
 	private WebElement getSendButton() {
 		return driver.findElement(By.id("submitMessage"));
 	}
