@@ -1,4 +1,4 @@
-package automationpractise.com;
+package automationpractice.com;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,14 +28,10 @@ public class ContactUs {
 	public void contactUsTest() {
 		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php");
-
-		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
-		ContactUs.click();
+		driver.findElement(By.partialLinkText("Contact")).click();
 		driver.getCurrentUrl();
-		{
-			Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php?controller=contact");
-			driver.close();
-		}
+		Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php?controller=contact");
+		driver.close();
 	}
 
 	/* Choosing drop down first option */
@@ -43,19 +39,15 @@ public class ContactUs {
 	public void dropdownTests1() {
 		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php");
-		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
-		ContactUs.click();
-		Select Subject = new Select(driver.findElement(By.id("id_contact")));
-		Subject.selectByVisibleText("Customer service");
+		driver.findElement(By.partialLinkText("Contact")).click();
+		Select subject = new Select(driver.findElement(By.id("id_contact")));
+		subject.selectByVisibleText("Customer service");
 
 		/* Checking if the text under the drop down is correct */
-		WebElement CustomerText = driver.findElement(By.xpath("//*[@id=\"desc_contact2\"]"));
-		CustomerText.getText();
-		{
-			Assert.assertEquals(CustomerText.getText(), "For any question about a product, an order");
-			driver.close();
-		}
-
+		WebElement customerText = driver.findElement(By.xpath("//*[@id=\"desc_contact2\"]"));
+		customerText.getText();
+		Assert.assertEquals(customerText.getText(), "For any question about a product, an order");
+		driver.close();
 	}
 
 	/* Choosing drop down second option */
@@ -63,17 +55,13 @@ public class ContactUs {
 	public void dropdownTests2() {
 		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php");
-		WebElement ContactUs = driver.findElement(By.partialLinkText("Contact"));
-		ContactUs.click();
-		Select Subject = new Select(driver.findElement(By.id("id_contact")));
-		Subject.selectByVisibleText("Webmaster");
-
-		WebElement WebmasterText = driver.findElement(By.xpath("//*[@id=\"desc_contact1\"]"));
-		WebmasterText.getText();
-		{
-			Assert.assertEquals(WebmasterText.getText(), "If a technical problem occurs on this website");
-			driver.close();
-		}
-
+		driver.findElement(By.partialLinkText("Contact")).click();
+		Select subject = new Select(driver.findElement(By.id("id_contact")));
+		subject.selectByVisibleText("Webmaster");
+		WebElement webmasterText = driver.findElement(By.xpath("//*[@id=\"desc_contact1\"]"));
+		webmasterText.getText();
+		Assert.assertEquals(webmasterText.getText(), "If a technical problem occurs on this website");
+		driver.close();
 	}
+
 }
