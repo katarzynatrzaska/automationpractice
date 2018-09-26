@@ -1,4 +1,4 @@
-package automationpractice.com;
+ackage automationpractice.com;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class CreateAccount {
 
 	@AfterTest()
 	public void afterTest() {
-
+		driver.quit();
 	}
 
 	@Test(priority = 0)
@@ -59,6 +60,9 @@ public class CreateAccount {
 		driver.findElement(By.id("postcode")).sendKeys("90210");
 		driver.findElement(By.id("phone_mobile")).sendKeys((rad.nextInt(100) + "123456"));
 		driver.findElement(By.id("submitAccount")).click();
+
+		driver.getCurrentUrl();
+		Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php?controller=my-account");
 	}
 
 	Random rad = new Random();
