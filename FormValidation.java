@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -39,4 +40,14 @@ public class FormValidation {
 		Assert.assertEquals(ErrorField.getText(), "The message cannot be blank.");
 	}
 
+	@Test(priority = 2)
+	public void allCorrect() {
+		Select subject = new Select(driver.findElement(By.id("id_contact")));
+		subject.selectByVisibleText("Customer service");
+		driver.findElement(By.id("id_order")).sendKeys("Order 123");
+		driver.findElement(By.id("message")).sendKeys("Test message");
+		driver.findElement(By.id("submitMessage")).click();
+		WebElement ErrorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/p"));
+		Assert.assertEquals(ErrorField.getText(), "Your message has been successfully sent to our team.");
+	}
 }
