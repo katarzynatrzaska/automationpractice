@@ -1,8 +1,7 @@
-package automationpractise.com;
+package automationpractice.com;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -30,8 +29,7 @@ public class LogoRedirect {
 		driver.get("http://automationpractice.com/index.php");
 
 		/* Your Logo img - verify redirect URL */
-		WebElement yourLogo = driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/img/logo.jpg"));
-		yourLogo.click();
+		driver.findElement(By.cssSelector("[src=\"http://automationpractice.com/img/logo.jpg")).click();
 		driver.getCurrentUrl();
 		Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php");
 	}
