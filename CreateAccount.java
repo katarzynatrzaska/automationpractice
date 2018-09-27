@@ -1,4 +1,4 @@
-package automationpractice.com;
+package com.automationpractice;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -11,7 +11,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import java.util.Random;
 
 public class CreateAccount {
 	protected static WebDriver driver;
@@ -31,8 +30,9 @@ public class CreateAccount {
 
 		driver = new ChromeDriver();
 		driver.get("http://automationpractice.com/index.php");
+		driver.manage().window().maximize();
 		driver.findElement(By.partialLinkText("Sign")).click();
-		driver.findElement(By.id("email_create")).sendKeys("usename" + rad.nextInt(100) + "@test.com");
+		driver.findElement(By.id("email_create")).sendKeys(EmailGenerator.getRandomEmail());
 		driver.findElement(By.id("SubmitCreate")).click();
 
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -52,24 +52,18 @@ public class CreateAccount {
 
 		driver.findElement(By.id("id_gender2")).click();
 		driver.findElement(By.id("passwd")).sendKeys((RandomStringUtils.randomAlphabetic(8)));
-		driver.findElement(By.id("address1")).sendKeys((rad.nextInt(100) + " TestStreet"));
+		driver.findElement(By.id("address1")).sendKeys((EmailGenerator.getRandomEmail() + " TestStreet"));
 		driver.findElement(By.id("city")).sendKeys("TestCity");
 
 		Select state = new Select(driver.findElement(By.id("id_state")));
 		state.selectByVisibleText("Oklahoma");
 		driver.findElement(By.id("postcode")).sendKeys("90210");
-		driver.findElement(By.id("phone_mobile")).sendKeys((rad.nextInt(100) + "123456"));
+		driver.findElement(By.id("phone_mobile")).sendKeys((EmailGenerator.getRandomEmail() + "123456"));
 		driver.findElement(By.id("submitAccount")).click();
 
 		driver.getCurrentUrl();
-		Assert.assertEquals(driver.getCurrentUrl(), "http://automationpractice.com/index.php?controller=my-account");
-	}
-
-	Random rad = new Random();
-	{
-		for (int j = 1; j <= 1; j++) {
-			System.out.print("usename" + rad.nextInt(100) + "@test.com");
-		}
+		Assert.assertEquals(driver.getCurrentUrl(),
+				"http://automationpractice.com/index.php?controller=authentication");
 	}
 
 	public String generateRandomString(int length) {
