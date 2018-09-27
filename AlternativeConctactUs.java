@@ -1,4 +1,6 @@
-package automationpractice.com;
+//var SendButton is calld using private WebElement getSendButton//
+
+package com.automationpractice;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,8 +36,9 @@ public class AlternativeConctactUs {
 		getSendButton().click();
 		WebElement errorField = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/ol/li"));
 		Assert.assertEquals(errorField.getText(), "The message cannot be blank.");
+
 	}
-	
+
 	private WebElement getSendButton() {
 		return driver.findElement(By.id("submitMessage"));
 	}
